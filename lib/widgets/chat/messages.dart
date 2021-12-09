@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../chat/message_bubble.dart';
@@ -23,11 +24,17 @@ class Messages extends StatelessWidget {
             return ListView.builder(
               reverse: true,
               itemCount: documents.length,
-              itemBuilder: (context, index) =>
-                  MessageBubble(documents[index].get('text')),
+              itemBuilder: (context, index) => MessageBubble(
+                documents[index].get('text'),
+                documents[index].get('userId') ==
+                    (FirebaseAuth.instance.currentUser?.uid ?? ""),
+                key: ValueKey(
+                  documents[index].id,
+                ),
+              ),
             );
           } else {
-            return const CircularProgressIndicator();
+            return const Center(child: CircularProgressIndicator());
           }
         }
       },
