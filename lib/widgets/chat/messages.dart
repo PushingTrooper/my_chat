@@ -28,6 +28,7 @@ class Messages extends StatelessWidget {
                 documents[index].get('text'),
                 documents[index].get('userId') ==
                     (FirebaseAuth.instance.currentUser?.uid ?? ""),
+                documents[index].get('username'),
                 key: ValueKey(
                   documents[index].id,
                 ),
