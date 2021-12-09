@@ -16,7 +16,7 @@ class Messages extends StatelessWidget {
           .snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const CircularProgressIndicator();
+          return const Center(child: CircularProgressIndicator());
         } else {
           if (snapshot.data != null) {
             final documents = (snapshot.data as QuerySnapshot).docs;
