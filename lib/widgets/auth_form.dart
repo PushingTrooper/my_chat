@@ -37,7 +37,7 @@ class _AuthFormState extends State<AuthForm> {
     final isValid = _formKey.currentState?.validate() ?? false;
     FocusScope.of(context).unfocus();
 
-    if (_userImageFile == null) {
+    if (_userImageFile == null && !_isLogin) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: const Text('Please pick and image'),
         backgroundColor: Theme.of(context).errorColor
@@ -110,8 +110,8 @@ class _AuthFormState extends State<AuthForm> {
                   TextFormField(
                     key: const ValueKey('password'),
                     validator: (value) {
-                      if (value == null || value.isEmpty || value.length < 7) {
-                        return 'Please enter a password longer than 6 characters';
+                      if (value == null || value.isEmpty || value.length < 6) {
+                        return 'Please enter a password longer than 5 characters';
                       } else {
                         return null;
                       }
