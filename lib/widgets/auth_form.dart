@@ -39,22 +39,16 @@ class _AuthFormState extends State<AuthForm> {
 
     if (_userImageFile == null && !_isLogin) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: const Text('Please pick and image'),
-        backgroundColor: Theme.of(context).errorColor
-      ));
+          content: const Text('Please pick and image'),
+          backgroundColor: Theme.of(context).errorColor));
       return;
     }
 
     if (isValid) {
       _formKey.currentState?.save();
 
-      widget.submitFn(
-        _userEmail.trim(),
-        _userPassword,
-        _username,
-        _isLogin,
-        _userImageFile
-      );
+      widget.submitFn(_userEmail.trim(), _userPassword, _username, _isLogin,
+          _userImageFile);
     }
   }
 
@@ -73,6 +67,9 @@ class _AuthFormState extends State<AuthForm> {
                 children: [
                   if (!_isLogin) UserImagePicker(_pickedImage),
                   TextFormField(
+                    autocorrect: false,
+                    textCapitalization: TextCapitalization.none,
+                    enableSuggestions: false,
                     key: const ValueKey('email'),
                     validator: (value) {
                       if (value == null ||
@@ -92,6 +89,9 @@ class _AuthFormState extends State<AuthForm> {
                   ),
                   if (!_isLogin)
                     TextFormField(
+                      autocorrect: false,
+                      textCapitalization: TextCapitalization.words,
+                      enableSuggestions: false,
                       key: const ValueKey('username'),
                       validator: (value) {
                         if (value == null ||
